@@ -13,6 +13,7 @@ new_directory = '../data/clean/'
 for index, file in enumerate(os.listdir(directory)):
     image = cv2.imread(directory + file)
     face = extract_face(image, n)
+    cv2.imwrite(new_directory + 'train/' + 'A' + file, face)
     vector = image_to_vector(face)
     inputs[index, :] = vector
     labels[index] = 1
@@ -22,6 +23,7 @@ for index, file in enumerate(os.listdir(directory)):
     index += 10
     image = cv2.imread(directory + file)
     face = extract_face(image, n)
+    cv2.imwrite(new_directory + 'train/' + 'B' + file, face)
     vector = image_to_vector(face)
     inputs[index, :] = vector
     labels[index] = 0
@@ -37,6 +39,7 @@ directory = '../data/original/test/classA/'
 for index, file in enumerate(os.listdir(directory)):
     image = cv2.imread(directory + file)
     face = extract_face(image, n)
+    cv2.imwrite(new_directory + 'test/' + 'A' + file, face)
     vector = image_to_vector(face)
     inputs[index, :] = vector
     labels[index] = 1
@@ -46,6 +49,7 @@ for index, file in enumerate(os.listdir(directory)):
     index += 5
     image = cv2.imread(directory + file)
     face = extract_face(image, n)
+    cv2.imwrite(new_directory + 'test/' + 'B' + file, face)
     vector = image_to_vector(face)
     inputs[index, :] = vector
     labels[index] = 0
