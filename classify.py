@@ -6,7 +6,7 @@ from sklearn.decomposition import PCA
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import LinearSVC
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, f1_score
 
 # Load training data
 directory = '../data/clean/'
@@ -16,7 +16,7 @@ input = data['inputs']
 labels = data['labels']
 
 # Principal components projection
-pca = PCA(n_components=7)
+pca = PCA(n_components=13)
 pca.fit(input)
 projection = pca.transform(input)
 
@@ -29,7 +29,7 @@ classifierSVM = LinearSVC()
 classifierSVM.fit(projection, labels)
 
 # Logistic regression training
-classifierLR = LogisticRegression()
+classifierLR = LogisticRegression(solver='lbfgs')
 classifierLR.fit(projection, labels)
 
 # Load and project the testing data
@@ -42,13 +42,16 @@ projection = pca.transform(input)
 
 # k-nearest neighbors testing
 predictions = classifierKNN.predict(projection)
-print(f"Accuracy: {accuracy_score(labels, predictions)}\n")
+print(f"kNN. Accuracy: {accuracy_score(labels, predictions):.2f}, "
+      f"F1 score: {f1_score(labels, predictions):.2f}")
 
 # Support vector machine testing
 predictions = classifierSVM.predict(projection)
-print(f"Accuracy: {accuracy_score(labels, predictions)}\n")
+print(f"SVM. Accuracy: {accuracy_score(labels, predictions):.2f}, "
+      f"F1 score: {f1_score(labels, predictions):.2f}")
 
 # Logistic regression testing
 predictions = classifierLR.predict(projection)
-print(f"Accuracy: {accuracy_score(labels, predictions)}\n")
+print(f" LR. Accuracy: {accuracy_score(labels, predictions):.2f}, "
+      f"F1 score: {f1_score(labels, predictions):.2f}")
 

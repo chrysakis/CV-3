@@ -10,7 +10,7 @@ with open(directory + 'train.pkl', 'rb') as input:
 input = data['inputs']
 labels = data['labels']
 
-pca = PCA(n_components=7)
+pca = PCA(n_components=13)
 projection = pca.fit_transform(input)
 reconstruction = pca.inverse_transform(projection)
 print(pca.singular_values_ / np.sum(pca.singular_values_), '\n')
