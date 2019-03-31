@@ -13,8 +13,7 @@ labels = data['labels']
 pca = PCA(n_components=13)
 projection = pca.fit_transform(input)
 reconstruction = pca.inverse_transform(projection)
-print(pca.singular_values_ / np.sum(pca.singular_values_), '\n')
-print(1 - pca.explained_variance_ratio_)
+print(np.cumsum(pca.singular_values_ / np.sum(pca.singular_values_)), '\n')
 
 for i, image in enumerate(input):
     combined = np.concatenate((vector_to_image(image),
