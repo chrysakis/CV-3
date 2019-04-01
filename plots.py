@@ -20,7 +20,6 @@ test_input = data['inputs']
 pca = PCA(n_components=20)
 projection = pca.fit_transform(input)
 evr = np.cumsum(pca.singular_values_ / np.sum(pca.singular_values_))
-print(evr)
 fig0 = plt.figure()
 ax = plt.subplot(1, 1 ,1)
 x = np.arange(len(evr))
@@ -36,6 +35,9 @@ projection = pca.fit_transform(input)
 reconstruction = pca.inverse_transform(projection)
 fig1 = plt.figure()
 plt.scatter(projection[:, 0], projection[:, 1], c=labels)
+plt.title('Projection of the images in the 2D eigenspace')
+plt.xlabel('Eigenface 1')
+plt.ylabel('Eigenface 2')
 plt.show()
 fig1.savefig('../plots/scatter1.png', dpi=200, bbox_inches='tight')
 
@@ -50,6 +52,9 @@ for i, vector in enumerate(input):
     ab = AnnotationBbox(imagebox, (projection[i, 0], projection[i, 1]),
                         pad=0.1)
     ax.add_artist(ab)
+plt.title('Projection of the images in the 2D eigenspace')
+plt.xlabel('Eigenface 1')
+plt.ylabel('Eigenface 2')
 plt.show()
 fig2.savefig('../plots/scatter2.png', dpi=1000, bbox_inches='tight')
 

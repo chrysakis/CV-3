@@ -16,7 +16,7 @@ input = data['inputs']
 labels = data['labels']
 
 # Principal components projection
-pca = PCA(n_components=13)
+pca = PCA(n_components=6)
 pca.fit(input)
 projection = pca.transform(input)
 
